@@ -1,0 +1,194 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+  <property name="blob_type" value="bytea" dbms="postgresql"/>
+
+
+  <changeSet id="12122020-2147" author="nemykina">
+
+    <createTable tableName="word">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" primaryKeyName="pk_word" unique="true" nullable="false"/>
+      </column>
+      <column name="original" type="VARCHAR"/>
+      <column name="translation" type="VARCHAR"/>
+      <column name="word_set" type="VARCHAR"/>
+    </createTable>
+
+
+    <createTable tableName="word_set">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" primaryKeyName="pk_word_set" unique="true" nullable="false"/>
+      </column>
+      <column name="name" type="VARCHAR"/>
+      <column name="image_path_uri" type="VARCHAR"/>
+    </createTable>
+
+    <createTable tableName="word_set2word">
+      <column name="word_set_id" type="bigint">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="word_set2word_pkey"
+                     references="word_set(id)" foreignKeyName="word_set2word_user_fk"
+        />
+      </column>
+      <column name="word_id" type="bigint">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="word_set2authority_pkey"
+                     references="word(id)" foreignKeyName="word_set2word_fk"/>
+      </column>
+    </createTable>
+
+    <createTable tableName="course">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" primaryKeyName="pk_course" unique="true" nullable="false"/>
+      </column>
+      <column name="name" type="VARCHAR"/>
+      <column name="number_of_topics" type="int"/>
+      <column name="category" type="VARCHAR"/>
+      <column name="subcategory" type="VARCHAR"/>
+      <column name="cookies" type="int"/>
+      <column name="theory" type="VARCHAR"/>
+    </createTable>
+
+    <createTable tableName="authority">
+      <column name="id" remarks="ID" type="integer" autoIncrement="true">
+        <constraints primaryKey="true" primaryKeyName="authority_pkey"/>
+      </column>
+      <column name="name" type="varchar(255)">
+        <constraints unique="true" uniqueConstraintName="authority_name_uk"/>
+      </column>
+      <column name="description" type="varchar(1024)"/>
+      <column name="date_time_create" remarks="Дата время вставки записи" type="datetime"/>
+      <column name="date_time_modif" remarks="Дата время модификации записи" type="datetime"/>
+    </createTable>
+
+    <createTable tableName="user">
+      <column name="id" type="uuid">
+        <constraints primaryKey="true" primaryKeyName="user_data_pkey" unique="true" nullable="false"/>
+      </column>
+      <column name="username" type="varchar(1024)">
+        <constraints unique="true" nullable="false"/>
+      </column>
+      <column name="account_confirmed" type="boolean"/>
+      <column name="account_expired" type="boolean"/>
+      <column name="account_locked" type="boolean"/>
+      <column name="credentials_expired" type="boolean"/>
+      <column name="enabled" type="boolean"/>
+      <column name="user_password" type="varchar(255)"/>
+      <column name="balance_of_cookies" type="int"/>
+    </createTable>
+
+    <createTable tableName="user2authority">
+      <column name="user_id" type="uuid">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="user2authority_pkey"
+                     references="user(id)" foreignKeyName="user2authority_user_fk"
+        />
+      </column>
+      <column name="authority_id" type="bigint">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="user2authority_pkey"
+                     references="authority(id)" foreignKeyName="user2authority_fk"/>
+      </column>
+    </createTable>
+
+
+    <createTable tableName="user2word_set">
+      <column name="user_id" type="uuid">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="user2word_set_pkey"
+                     references="user(id)" foreignKeyName="user2word_set_fk"
+        />
+      </column>
+      <column name="word_set_id" type="bigint">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="user2word_set_pkey"
+                     references="word_set(id)" foreignKeyName="user2_word_set_fk"/>
+      </column>
+    </createTable>
+
+    <createTable tableName="text_exercise">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" primaryKeyName="pk_text_exercise" unique="true" nullable="false"/>
+      </column>
+      <column name="name" type="VARCHAR"/>
+      <column name="text" type="VARCHAR"/>
+      <column name="cookies" type="int"/>
+    </createTable>
+
+
+    <createTable tableName="video_exercise">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" primaryKeyName="pk_video_exercise" unique="true" nullable="false"/>
+      </column>
+      <column name="name" type="VARCHAR"/>
+      <column name="video_url" type="VARCHAR"/>
+      <column name="cookies" type="int"/>
+    </createTable>
+
+    <createTable tableName="user2course_progress">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" primaryKeyName="user2course_progress_pkey"/>
+      </column>
+      <column name="user_id" type="uuid">
+        <constraints nullable="false" references="user(id)"
+                     foreignKeyName="user2course_progress_user_fk"/>
+      </column>
+      <column name="course_id" type="bigint">
+        <constraints nullable="false" references="course(id)"
+                     foreignKeyName="user2course_progress_course_fk"/>
+      </column>
+      <column name="progress" type="int"/>
+      <column name="status" type="boolean"/>
+    </createTable>
+
+    <createTable tableName="user2text_progress">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" primaryKeyName="user2text_progress_pkey"/>
+      </column>
+      <column name="user_id" type="uuid">
+        <constraints nullable="false" references="user(id)"
+                     foreignKeyName="user2text_progress_user_fk"/>
+      </column>
+      <column name="text_exercise_id" type="bigint">
+        <constraints nullable="false" references="text_exercise(id)"
+                     foreignKeyName="user2course_progress_text_exercise_fk"/>
+      </column>
+      <column name="progress" type="int"/>
+      <column name="status" type="boolean"/>
+    </createTable>
+
+    <createTable tableName="user2video_progress">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" primaryKeyName="user2video_progress_pkey"/>
+      </column>
+      <column name="user_id" type="uuid">
+        <constraints nullable="false" references="user(id)"
+                     foreignKeyName="user2video_progress_user_fk"/>
+      </column>
+      <column name="video_exercise_id" type="bigint">
+        <constraints nullable="false" references="video_exercise(id)"
+                     foreignKeyName="user2course_progress_video_exercise_fk"/>
+      </column>
+      <column name="progress" type="int"/>
+      <column name="status" type="boolean"/>
+    </createTable>
+
+    <createTable tableName="user2word_status">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" primaryKeyName="user2word_status_pkey"/>
+      </column>
+      <column name="user_id" type="uuid">
+        <constraints nullable="false" references="user(id)"
+                     foreignKeyName="user2word_status_user_fk"/>
+      </column>
+      <column name="word_id" type="bigint">
+        <constraints nullable="false" references="word(id)"
+                     foreignKeyName="user2word_status_word_fk"/>
+      </column>
+      <column name="progress" type="int"/>
+      <column name="status" type="smallint"/>
+    </createTable>
+
+
+  </changeSet>
+
+
+
+</databaseChangeLog>
