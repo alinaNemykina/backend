@@ -1,10 +1,10 @@
 package com.example.backend.business.service;
 
-import com.example.backend.business.entity.TaskEntity;
+import com.example.backend.web.dto.read.TaskReadDto;
 
-import java.util.List;
+import java.util.UUID;
 
 public interface TaskService {
-    TaskEntity getById(Long id);
-    List<TaskEntity> getAll();
+     TaskReadDto getById(UUID id);
+//    List<TaskEntity> getAll();
 }

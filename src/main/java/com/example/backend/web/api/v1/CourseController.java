@@ -2,6 +2,7 @@ package com.example.backend.web.api.v1;
 
 import com.example.backend.business.entity.CourseEntity;
 import com.example.backend.business.service.CourseService;
+import com.example.backend.web.dto.read.CourseReadDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ public class CourseController {
     }
 
     @GetMapping(ALL)
-    public List<CourseEntity> getAll() {
+    public List<CourseReadDto> getAll() {
         return courseService.getAll();
     }
 }

@@ -8,31 +8,25 @@ import javax.validation.constraints.NotBlank;
 
 @NoArgsConstructor
 @Entity
-@Table (name = "word")
+@Table(name = "word")
 @EqualsAndHashCode()
 public class WordEntity {
-    public WordEntity(Long id, @NotBlank String original, @NotBlank String translation, String wordSet) {
-        this.id = id;
-        this.original = original;
-        this.translation = translation;
-        this.wordSet = wordSet;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     @NotBlank
     @Column(name = "original")
     private String original;
-
     @NotBlank
     @Column(name = "translation")
     private String translation;
 
-    @Column(name = "word_set")
-    private String wordSet;
+    public WordEntity(Long id, @NotBlank String original, @NotBlank String translation, String wordSet) {
+        this.id = id;
+        this.original = original;
+        this.translation = translation;
+    }
 
     public Long getId() {
         return id;
@@ -58,12 +52,5 @@ public class WordEntity {
         this.translation = translation;
     }
 
-    public String getWordSet() {
-        return wordSet;
-    }
-
-    public void setWordSet(String wordSet) {
-        this.wordSet = wordSet;
-    }
 
 }

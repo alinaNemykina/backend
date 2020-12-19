@@ -1,5 +1,6 @@
 package com.example.backend.business.entity;
 
+import com.example.backend.business.enums.StatusCourseEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -15,10 +16,9 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode()
 public class CourseEntity {
 
-    public CourseEntity(Integer id, @NotBlank String name, @NotNull Integer numberOfTopics, @NotBlank String category, @NotBlank String subcategory, @NotNull Integer cookies, @NotBlank String theory) {
+    public CourseEntity(Integer id, @NotBlank String name, @NotBlank String category, @NotBlank String subcategory, @NotNull Integer cookies, @NotBlank String theory) {
         this.id = id;
         this.name = name;
-        this.numberOfTopics = numberOfTopics;
         this.category = category;
         this.subcategory = subcategory;
         this.cookies = cookies;
@@ -34,9 +34,6 @@ public class CourseEntity {
     @Column(name = "name")
     private String name;
 
-    @NotNull
-    @Column(name = "number_of_topics")
-    private Integer numberOfTopics;
 
     @NotBlank
     @Column(name = "category")
@@ -53,60 +50,4 @@ public class CourseEntity {
     @NotBlank
     @Column(name = "theory")
     private String theory;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getNumberOfTopics() {
-        return numberOfTopics;
-    }
-
-    public void setNumberOfTopics(Integer numberOfTopics) {
-        this.numberOfTopics = numberOfTopics;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getSubcategory() {
-        return subcategory;
-    }
-
-    public void setSubcategory(String subcategory) {
-        this.subcategory = subcategory;
-    }
-
-    public Integer getCookies() {
-        return cookies;
-    }
-
-    public void setCookies(Integer cookies) {
-        this.cookies = cookies;
-    }
-
-    public String getTheory() {
-        return theory;
-    }
-
-    public void setTheory(String theory) {
-        this.theory = theory;
-    }
 }

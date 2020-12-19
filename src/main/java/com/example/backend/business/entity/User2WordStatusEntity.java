@@ -66,4 +66,3 @@ public class User2WordStatusEntity {
         this.status = status;
     }
 }
-

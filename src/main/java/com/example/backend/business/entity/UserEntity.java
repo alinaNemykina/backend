@@ -15,8 +15,9 @@ import static javax.persistence.CascadeType.ALL;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @EqualsAndHashCode()
+@ToString(exclude ={"wordSets", "words","courses"})
 public class UserEntity implements UserDetails {
 
     public UserEntity(UUID id, @NotBlank String username, @Email @NotBlank String email, @NotNull Integer balanceOfCookies, @Size(min = 6) @NotEmpty String password, boolean accountConfirmed, boolean accountExpired, boolean accountLocked, boolean credentialsExpired, boolean enabled, Set<AuthorityEntity> userAuthorities, List<WordSetEntity> wordSets, List<WordEntity> words, List<CourseEntity> courses) {
@@ -55,7 +56,7 @@ public class UserEntity implements UserDetails {
     @Size(min = 6)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotEmpty
-    @Column(name = "password")
+    @Column(name = "user_password")
     private String password;
 
     @Column(name = "account_confirmed")
@@ -115,6 +116,7 @@ public class UserEntity implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return !isCredentialsExpired();
     }
+
 
     public void addAuthority(AuthorityEntity authority) {
         if (userAuthorities == null) {

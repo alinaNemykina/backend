@@ -14,7 +14,6 @@
       </column>
       <column name="original" type="VARCHAR"/>
       <column name="translation" type="VARCHAR"/>
-      <column name="word_set" type="VARCHAR"/>
     </createTable>
 
 
@@ -43,7 +42,6 @@
         <constraints primaryKey="true" primaryKeyName="pk_course" unique="true" nullable="false"/>
       </column>
       <column name="name" type="VARCHAR"/>
-      <column name="number_of_topics" type="int"/>
       <column name="category" type="VARCHAR"/>
       <column name="subcategory" type="VARCHAR"/>
       <column name="cookies" type="int"/>
@@ -62,7 +60,7 @@
       <column name="date_time_modif" remarks="Дата время модификации записи" type="datetime"/>
     </createTable>
 
-    <createTable tableName="user">
+    <createTable tableName="users">
       <column name="id" type="uuid">
         <constraints primaryKey="true" primaryKeyName="user_data_pkey" unique="true" nullable="false"/>
       </column>
@@ -75,13 +73,14 @@
       <column name="credentials_expired" type="boolean"/>
       <column name="enabled" type="boolean"/>
       <column name="user_password" type="varchar(255)"/>
+      <column name="email" type="varchar(255)"/>
       <column name="balance_of_cookies" type="int"/>
     </createTable>
 
     <createTable tableName="user2authority">
       <column name="user_id" type="uuid">
         <constraints nullable="false" primaryKey="true" primaryKeyName="user2authority_pkey"
-                     references="user(id)" foreignKeyName="user2authority_user_fk"
+                     references="users(id)" foreignKeyName="user2authority_user_fk"
         />
       </column>
       <column name="authority_id" type="bigint">
@@ -94,7 +93,7 @@
     <createTable tableName="user2word_set">
       <column name="user_id" type="uuid">
         <constraints nullable="false" primaryKey="true" primaryKeyName="user2word_set_pkey"
-                     references="user(id)" foreignKeyName="user2word_set_fk"
+                     references="users(id)" foreignKeyName="user2word_set_fk"
         />
       </column>
       <column name="word_set_id" type="bigint">
@@ -127,7 +126,7 @@
         <constraints primaryKey="true" primaryKeyName="user2course_progress_pkey"/>
       </column>
       <column name="user_id" type="uuid">
-        <constraints nullable="false" references="user(id)"
+        <constraints nullable="false" references="users(id)"
                      foreignKeyName="user2course_progress_user_fk"/>
       </column>
       <column name="course_id" type="bigint">
@@ -135,7 +134,7 @@
                      foreignKeyName="user2course_progress_course_fk"/>
       </column>
       <column name="progress" type="int"/>
-      <column name="status" type="boolean"/>
+      <column name="status" type="smallint"/>
     </createTable>
 
     <createTable tableName="user2text_progress">
@@ -143,7 +142,7 @@
         <constraints primaryKey="true" primaryKeyName="user2text_progress_pkey"/>
       </column>
       <column name="user_id" type="uuid">
-        <constraints nullable="false" references="user(id)"
+        <constraints nullable="false" references="users(id)"
                      foreignKeyName="user2text_progress_user_fk"/>
       </column>
       <column name="text_exercise_id" type="bigint">
@@ -151,7 +150,7 @@
                      foreignKeyName="user2course_progress_text_exercise_fk"/>
       </column>
       <column name="progress" type="int"/>
-      <column name="status" type="boolean"/>
+      <column name="status" type="smallint"/>
     </createTable>
 
     <createTable tableName="user2video_progress">
@@ -159,7 +158,7 @@
         <constraints primaryKey="true" primaryKeyName="user2video_progress_pkey"/>
       </column>
       <column name="user_id" type="uuid">
-        <constraints nullable="false" references="user(id)"
+        <constraints nullable="false" references="users(id)"
                      foreignKeyName="user2video_progress_user_fk"/>
       </column>
       <column name="video_exercise_id" type="bigint">
@@ -167,7 +166,7 @@
                      foreignKeyName="user2course_progress_video_exercise_fk"/>
       </column>
       <column name="progress" type="int"/>
-      <column name="status" type="boolean"/>
+      <column name="status" type="smallint"/>
     </createTable>
 
     <createTable tableName="user2word_status">
@@ -175,7 +174,7 @@
         <constraints primaryKey="true" primaryKeyName="user2word_status_pkey"/>
       </column>
       <column name="user_id" type="uuid">
-        <constraints nullable="false" references="user(id)"
+        <constraints nullable="false" references="users(id)"
                      foreignKeyName="user2word_status_user_fk"/>
       </column>
       <column name="word_id" type="bigint">

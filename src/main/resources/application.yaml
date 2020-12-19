@@ -12,6 +12,8 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     drop-first: true
+
+
 server:
   servlet:
     session:

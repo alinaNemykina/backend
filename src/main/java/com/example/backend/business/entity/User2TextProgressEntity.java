@@ -1,5 +1,6 @@
 package com.example.backend.business.entity;
 
+import com.example.backend.business.enums.StatusTaskEnum;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +12,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = "user2text_progress")
 @EqualsAndHashCode()
 public class User2TextProgressEntity {
-    public User2TextProgressEntity(Long id, UserEntity user, TextExerciseEntity textExercise, @NotNull Integer progress, @NotNull Boolean status) {
+
+    public User2TextProgressEntity(Long id, UserEntity user, TextExerciseEntity textExercise, @NotNull Integer progress, @NotNull StatusTaskEnum status) {
         this.id = id;
         this.user = user;
         this.textExercise = textExercise;
@@ -37,8 +39,9 @@ public class User2TextProgressEntity {
     private Integer progress;
 
     @NotNull
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "status")
-    private Boolean status;
+    private StatusTaskEnum status;
 
     public Long getId() {
         return id;
@@ -72,11 +75,11 @@ public class User2TextProgressEntity {
         this.progress = progress;
     }
 
-    public Boolean getStatus() {
+    public StatusTaskEnum getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(StatusTaskEnum status) {
         this.status = status;
     }
 }

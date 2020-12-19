@@ -1,0 +1,171 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="blob_type" value="bytea" dbms="postgresql"/>
+    <changeSet id="17122020-2338" author="nemykina">
+        <insert tableName="users">
+            <column name="id">85e1ffd0-40a9-11eb-b378-0242ac130002</column>
+            <column name="username">Professional badminton player</column>
+            <column name="email">nemykina@gmail.com</column>
+            <column name="user_password">123</column>
+            <column name="enabled">true</column>
+            <column name="credentials_expired">false</column>
+            <column name="account_locked">false</column>
+            <column name="account_expired">false</column>
+            <column name="account_confirmed">true</column>
+            <column name="balance_of_cookies">100</column>
+            <column name="account_confirmed">true</column>
+        </insert>
+
+
+        <insert tableName="authority">
+            <column name="id">1</column>
+            <column name="name">ADMIN</column>
+            <column name="description">null</column>
+            <column name="date_time_create" valueDate="now()"/>
+            <column name="date_time_modif" valueDate="now()"/>
+        </insert>
+
+        <insert tableName="authority">
+            <column name="id">2</column>
+            <column name="name">USER</column>
+            <column name="description">null</column>
+            <column name="date_time_create" valueDate="now()"/>
+            <column name="date_time_modif" valueDate="now()"/>
+        </insert>
+
+        <insert tableName="user2authority">
+            <column name="user_id" value="85e1ffd0-40a9-11eb-b378-0242ac130002"/>
+            <column name="authority_id" value="1"/>
+        </insert>
+
+        <insert tableName="video_exercise">
+            <column name="id">1</column>
+            <column name="name">Irregular Verbs in English – Groups 1 &amp; 2</column>
+            <column name="video_url">https://www.youtube.com/watch?v=fPTKESyRZs0</column>
+            <column name="cookies">20</column>
+        </insert>
+
+        <insert tableName="video_exercise">
+            <column name="id">2</column>
+            <column name="name">Clothes Vocabulary 1 - Sentences by ELF Learning</column>
+            <column name="video_url">https://www.youtube.com/watch?v=taoCF1cKZSY&amp;t=58s</column>
+            <column name="cookies">20</column>
+        </insert>
+
+        <insert tableName="video_exercise">
+            <column name="id">3</column>
+            <column name="name">ллллллллллллллллллллллences by ELF Learning</column>
+            <column name="video_url">https://www.youtube.com/watch?v=taoCF1cKZSY&amp;t=58s</column>
+            <column name="cookies">20</column>
+        </insert>
+
+        <insert tableName="word">
+            <column name="id">1</column>
+            <column name="original">Cat</column>
+            <column name="translation">Кот</column>
+        </insert>
+        <insert tableName="word">
+            <column name="id">2</column>
+            <column name="original">Parrot</column>
+            <column name="translation">Папугай</column>
+        </insert>
+        <insert tableName="word">
+            <column name="id">3</column>
+            <column name="original">Сhihuahua</column>
+            <column name="translation">Чихуахуа</column>
+        </insert>
+        <insert tableName="word">
+            <column name="id">4</column>
+            <column name="original">Shawarma</column>
+            <column name="translation">Шаверма</column>
+        </insert>
+        <insert tableName="word">
+            <column name="id">5</column>
+            <column name="original">Tea</column>
+            <column name="translation">Чай</column>
+        </insert>
+        <insert tableName="word">
+            <column name="id">6</column>
+            <column name="original">Donut</column>
+            <column name="translation">Пончик</column>
+        </insert>
+
+        <insert tableName="text_exercise">
+            <column name="id">1</column>
+            <column name="name">Think before you speak</column>
+            <column name="text">A 24 years old boy seeing out from the train's
+                window shouted:
+                "Dad, look the trees are going behind!"
+                Dad smiled and a young couple sitting
+                nearby, looked at the 24 years old's childish
+                behavior with pity, suddenly he again
+                exclaimed:
+                "Dad, look the clouds are running with us!"
+                The couple couldn't resist and said to the old
+                man:
+                "Why don't you take your son to a good
+                doctor?"
+                The old man smiled and said:
+                "I did and we are just coming from the
+                hospital, my son was blind from birth, he just
+                got his eyes today."
+                Think before you speak.
+                ♥
+            </column>
+            <column name="cookies">7</column>
+        </insert>
+
+        <insert tableName="text_exercise">
+            <column name="id">2</column>
+            <column name="name">A lost dog</column>
+            <column name="text">A lost dog strays into a jungle. A lion sees this from a distance and says to himself with caution, "This guy looks edible, never seen
+                his kind before." So the lion starts rushing towards the dog with menace. The dog notices and starts to panic but as he's about to run he sees some bones next to him and gets an
+                idea. He says loudly, "Mmm...that was a delicious lion meat!" The lion abruptly stops and says " Woah!
+                This guy must be tougher than he looks...I better leave while I can." Over by the tree top, a monkey witnessed everything.
+                Evidently, the monkey realizes that he can benefit from this situation by telling the lion and getting
+                something in return. So the monkey proceeds to tell the lion what really happened and the lion says angrily, "Get on my back,
+                we'll go get him together".So they start rushing back to the dog. The dog sees them and realized what happened and starts to panic even more. He then gets another idea and shouts,
+                "Where the hell is that monkey?! I told him to bring me another lion an hour ago!!"
+            </column>
+            <column name="cookies">10</column>
+        </insert>
+
+        <insert tableName="course">
+            <column name="id">1</column>
+            <column name="name">Articles</column>
+            <column name="category">Грамматические курсы</column>
+            <column name="subcategory">Для начинающего уровня</column>
+            <column name="cookies">15</column>
+            <column name="theory">The definite article is the word the. It limits the meaning of a noun to one
+                particular thing. For example, your friend might ask, “Are you going to the party this weekend?” The
+                definite article tells you that your friend is referring to a specific party that both of you know
+                about. The definite article can be used with singular, plural, or uncountable nouns. Below are some
+                examples of the definite article the used in context.
+            </column>
+        </insert>
+
+        <insert tableName="course">
+            <column name="id">2</column>
+            <column name="name">Музыка для души</column>
+            <column name="category">Тематические курсы</column>
+            <column name="subcategory">Для увлечений</column>
+            <column name="cookies">15</column>
+            <column name="theory">Strauss - The blue danube
+                The word "classic" means something that is a perfect example of a particular style, something of lasting
+                worth or with a timeless quality. It denotes a particular quality in art, architecture, literature and
+                other cultural artifacts. In commerce, products are named "classic" to distinguish an old popular
+                version or model from a newer variety. Classic is used to describe many major, long-standing sporting
+                events. Colloquially, an everyday occurrence (e.g. a joke or mishap) may be described as 'an absolute
+                classic'. "Classic" should not be confused with classical, which refers specifically to certain cultural styles,
+                especially in music and architecture.
+            </column>
+        </insert>
+
+
+    </changeSet>
+
+
+</databaseChangeLog>

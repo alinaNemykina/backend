@@ -1,5 +1,6 @@
 package com.example.backend.business.entity;
 
+import com.example.backend.business.enums.StatusTaskEnum;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +12,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = "user2video_progress")
 @EqualsAndHashCode()
 public class User2VideoProgressEntity {
-    public User2VideoProgressEntity(Long id, UserEntity user, VideoExerciseEntity videoExercise, @NotNull Integer progress, @NotNull Boolean status) {
+
+    public User2VideoProgressEntity(Long id, UserEntity user, VideoExerciseEntity videoExercise, @NotNull Integer progress, @NotNull StatusTaskEnum status) {
         this.id = id;
         this.user = user;
         this.videoExercise = videoExercise;
@@ -37,6 +39,47 @@ public class User2VideoProgressEntity {
     private Integer progress;
 
     @NotNull
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "status")
-    private Boolean status;
+    private StatusTaskEnum status;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public VideoExerciseEntity getVideoExercise() {
+        return videoExercise;
+    }
+
+    public void setVideoExercise(VideoExerciseEntity videoExercise) {
+        this.videoExercise = videoExercise;
+    }
+
+    public Integer getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Integer progress) {
+        this.progress = progress;
+    }
+
+    public StatusTaskEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusTaskEnum status) {
+        this.status = status;
+    }
 }
