@@ -35,7 +35,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<Object> register(@RequestBody CreateUserDto user) {
-//        log.info("register controller");
+        log.info("register controller");
         return ResponseEntity.ok(userService.register(user));
     }
 
@@ -46,8 +46,8 @@ public class UserController {
     }
 
     @GetMapping("/all_user_count")
-    public Integer getCount(){
-        return userService.getCountUser();
+    public Long getCount(){
+        return userService.getUserCount();
     }
 
 }

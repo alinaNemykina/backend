@@ -2,6 +2,7 @@ package com.example.backend.web.api.v1;
 
 
 import com.example.backend.business.service.User2WordStatusService;
+import com.example.backend.web.dto.read.WordCountDto;
 import com.example.backend.web.dto.read.WordReadDto;
 import com.example.backend.web.dto.update.WordStatusUpdateDto;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,16 @@ public class User2WordStatusController {
     @GetMapping("/{id}")
     public List<WordReadDto> getAllWord(@PathVariable UUID id){
         return user2WordStatusService.getAllForUser(id);
+    }
+
+    @GetMapping("/learning/{id}")
+    public WordReadDto learningWord(@PathVariable UUID id){
+        return user2WordStatusService.getRandomWord(id);
+    }
+
+    @GetMapping("/count/{id}")
+    public WordCountDto countWord(@PathVariable UUID id){
+        return user2WordStatusService.getWordCount(id);
     }
 
     @PostMapping

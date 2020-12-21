@@ -68,7 +68,7 @@ public class TaskServiceImpl implements TaskService {
             textExerciseEntities = textExerciseService.getAll();
         }
         if (courseEntities.isEmpty()){
-            courseEntities = courseService.getAllEntities();
+            courseEntities = courseService.getAllEntity();
         }
         if (wordEntities.isEmpty()){
             wordEntities = wordService.getAll();

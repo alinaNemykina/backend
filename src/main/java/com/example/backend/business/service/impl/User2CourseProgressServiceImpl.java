@@ -25,6 +25,11 @@ public class User2CourseProgressServiceImpl implements User2CourseProgressServic
     }
 
     @Override
+    public User2CourseProgressEntity getCourseEntityByUserID(UUID userID, Integer courseID) {
+        return user2CourseProgressRepository.findByUserIdAndCourseId(userID,courseID);
+    }
+
+    @Override
     public List<Integer> getIdCourseInStatusLearned(UUID id) {
         return user2CourseProgressRepository.findAllByUserIdAndStatus(id, StatusCourseEnum.LEARNED).stream()
                 .map(User2CourseProgressEntity::getCourse).map(CourseEntity::getId).collect(Collectors.toList());

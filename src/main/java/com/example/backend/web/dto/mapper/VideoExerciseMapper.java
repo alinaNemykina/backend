@@ -9,16 +9,16 @@ import org.mapstruct.Mapper;
 public abstract class VideoExerciseMapper {
 
     public VideoExerciseReadDto toReadDto(VideoExerciseEntity videoExerciseEntity) {
-        if (videoExerciseEntity == null) {
+        if ( videoExerciseEntity == null ) {
             return null;
         }
 
         VideoExerciseReadDto videoExerciseReadDto = new VideoExerciseReadDto();
 
-        videoExerciseReadDto.setId(videoExerciseEntity.getId());
-        videoExerciseReadDto.setName(videoExerciseEntity.getName());
-        videoExerciseReadDto.setVideoUrl(videoExerciseEntity.getVideoUrl());
-        videoExerciseReadDto.setCookies(videoExerciseEntity.getCookies());
+        videoExerciseReadDto.setId( videoExerciseEntity.getId() );
+        videoExerciseReadDto.setName( videoExerciseEntity.getName() );
+        videoExerciseReadDto.setVideoUrl( videoExerciseEntity.getVideoUrl() );
+        videoExerciseReadDto.setCookies( videoExerciseEntity.getCookies() );
         videoExerciseReadDto.setStatus(StatusTaskEnum.LEARNING);
 
         return videoExerciseReadDto;

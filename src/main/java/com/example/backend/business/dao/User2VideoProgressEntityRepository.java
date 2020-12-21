@@ -1,6 +1,8 @@
 package com.example.backend.business.dao;
 
 
+import com.example.backend.business.entity.User2CourseProgressEntity;
+import com.example.backend.business.entity.User2TextProgressEntity;
 import com.example.backend.business.entity.User2VideoProgressEntity;
 import com.example.backend.business.enums.StatusTaskEnum;
 import org.springframework.data.jpa.repository.JpaRepository;

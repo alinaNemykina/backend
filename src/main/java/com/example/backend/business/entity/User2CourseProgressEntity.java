@@ -40,4 +40,44 @@ public class User2CourseProgressEntity {
     @NotNull
     @Column(name = "status")
     private StatusCourseEnum status; //enum
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public CourseEntity getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseEntity course) {
+        this.course = course;
+    }
+
+    public Integer getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Integer progress) {
+        this.progress = progress;
+    }
+
+    public StatusCourseEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusCourseEnum status) {
+        this.status = status;
+    }
 }

@@ -7,7 +7,9 @@ import com.example.backend.web.dto.create.CreateUserDto;
 import com.example.backend.web.dto.update.UserUpdateDto;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
+import java.util.Map;
 import java.util.UUID;
 
 public interface UserService extends UserDetailsService {
@@ -25,5 +27,12 @@ public interface UserService extends UserDetailsService {
 
     void update(UserUpdateDto userDto);
 
-    Integer getCountUser();
+
+    Map<String, Object> getAdditionInformation(OAuth2Authentication auth);
+
+    void checkResolution(UUID id);
+
+    Long getUserCount();
+
+
 }

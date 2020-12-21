@@ -28,5 +28,4 @@ public abstract class CourseMapper {
     }
 
     public abstract List<CourseReadDto> toReadDtos(List<CourseEntity> courseEntities);
-    public abstract CourseReadDto toReadDto(CourseEntity courseEntitie);
 }

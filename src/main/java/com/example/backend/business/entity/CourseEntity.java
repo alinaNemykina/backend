@@ -50,4 +50,52 @@ public class CourseEntity {
     @NotBlank
     @Column(name = "theory")
     private String theory;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSubcategory() {
+        return subcategory;
+    }
+
+    public void setSubcategory(String subcategory) {
+        this.subcategory = subcategory;
+    }
+
+    public Integer getCookies() {
+        return cookies;
+    }
+
+    public void setCookies(Integer cookies) {
+        this.cookies = cookies;
+    }
+
+    public String getTheory() {
+        return theory;
+    }
+
+    public void setTheory(String theory) {
+        this.theory = theory;
+    }
 }

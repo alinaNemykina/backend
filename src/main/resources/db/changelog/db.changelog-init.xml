@@ -5,11 +5,25 @@
 
     <property name="blob_type" value="bytea" dbms="postgresql"/>
     <changeSet id="17122020-2338" author="nemykina">
+
+        <!--        mrITmgvgRXOn secret-->
+        <insert tableName="oauth_client_details">
+            <column name="client_id">ui</column>
+            <column name="client_secret">{bcrypt}$2a$10$euycXlphx.TV5n.RKSI2BuWTiIyd1SJN.IkxDn6sHkU2twyBHsVKW</column>
+            <column name="authorized_grant_types">
+                authorization_code,implicit,password,client_credentials,refresh_token
+            </column>
+            <column name="additional_information">{}</column>
+            <column name="authorities">ROLE_POST,ROLE_RECEIVE</column>
+            <column name="scope">ui</column>
+        </insert>
+
+        <!--        admin123-->
         <insert tableName="users">
             <column name="id">85e1ffd0-40a9-11eb-b378-0242ac130002</column>
             <column name="username">Professional badminton player</column>
             <column name="email">nemykina@gmail.com</column>
-            <column name="user_password">123</column>
+            <column name="user_password">{bcrypt}$2a$10$uN9u8C75yyRYVYbh4KpTAea9i6y2dRtuNqtVooARvvZOBtnsbIoFu</column>
             <column name="enabled">true</column>
             <column name="credentials_expired">false</column>
             <column name="account_locked">false</column>
@@ -121,13 +135,18 @@
         <insert tableName="text_exercise">
             <column name="id">2</column>
             <column name="name">A lost dog</column>
-            <column name="text">A lost dog strays into a jungle. A lion sees this from a distance and says to himself with caution, "This guy looks edible, never seen
-                his kind before." So the lion starts rushing towards the dog with menace. The dog notices and starts to panic but as he's about to run he sees some bones next to him and gets an
+            <column name="text">A lost dog strays into a jungle. A lion sees this from a distance and says to himself
+                with caution, "This guy looks edible, never seen
+                his kind before." So the lion starts rushing towards the dog with menace. The dog notices and starts to
+                panic but as he's about to run he sees some bones next to him and gets an
                 idea. He says loudly, "Mmm...that was a delicious lion meat!" The lion abruptly stops and says " Woah!
-                This guy must be tougher than he looks...I better leave while I can." Over by the tree top, a monkey witnessed everything.
+                This guy must be tougher than he looks...I better leave while I can." Over by the tree top, a monkey
+                witnessed everything.
                 Evidently, the monkey realizes that he can benefit from this situation by telling the lion and getting
-                something in return. So the monkey proceeds to tell the lion what really happened and the lion says angrily, "Get on my back,
-                we'll go get him together".So they start rushing back to the dog. The dog sees them and realized what happened and starts to panic even more. He then gets another idea and shouts,
+                something in return. So the monkey proceeds to tell the lion what really happened and the lion says
+                angrily, "Get on my back,
+                we'll go get him together".So they start rushing back to the dog. The dog sees them and realized what
+                happened and starts to panic even more. He then gets another idea and shouts,
                 "Where the hell is that monkey?! I told him to bring me another lion an hour ago!!"
             </column>
             <column name="cookies">10</column>
@@ -159,7 +178,8 @@
                 other cultural artifacts. In commerce, products are named "classic" to distinguish an old popular
                 version or model from a newer variety. Classic is used to describe many major, long-standing sporting
                 events. Colloquially, an everyday occurrence (e.g. a joke or mishap) may be described as 'an absolute
-                classic'. "Classic" should not be confused with classical, which refers specifically to certain cultural styles,
+                classic'. "Classic" should not be confused with classical, which refers specifically to certain cultural
+                styles,
                 especially in music and architecture.
             </column>
         </insert>

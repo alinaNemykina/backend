@@ -9,16 +9,20 @@ import com.example.backend.business.service.UserService;
 import com.example.backend.web.dto.create.CreateUserDto;
 import com.example.backend.web.dto.mapper.UserMapper;
 import com.example.backend.web.dto.update.UserUpdateDto;
+import com.example.backend.web.error.NotAccessException;
 import com.example.backend.web.error.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -65,7 +69,7 @@ public class UserServiceImpl implements UserService {
     public UUID register(CreateUserDto newUser) {
         log.info("register service start new user: {}", newUser);
         UserEntity user = userMapper.toNewEntity(newUser);
-        user.addAuthority(findAuthorityByName(newUser.getAuthority()));
+        user.addAuthority(findAuthorityByName(AuthorityEnum.USER));
         log.info("register service end");
         return saveForRegister(user).getId();
 
@@ -88,9 +92,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer getCountUser() {
-        return userRepository.findAll().size();
+    @SneakyThrows
+    public Map<String, Object> getAdditionInformation(OAuth2Authentication auth) {
+        var details = (OAuth2AuthenticationDetails) auth.getDetails();
+        return (Map<String, Object>) details.getDecodedDetails();
     }
+
+    @Override
+    public void checkResolution(UUID id) {
+        if (!isAccess(id))
+            throw new NotAccessException("Нет доступа");
+
+    }
+
+    @Override
+    public Long getUserCount() {
+        return userRepository.count();
+    }
+
+    private boolean isAccess(UUID id) {
+        String userId = getAdditionInformation(getOAuth2Authentication()).get("user_id").toString();
+        return id.toString().equals(userId);
+    }
+
+    private OAuth2Authentication getOAuth2Authentication() {
+        return (OAuth2Authentication) SecurityContextHolder.getContext().getAuthentication();
+    }
+
 
 
 }

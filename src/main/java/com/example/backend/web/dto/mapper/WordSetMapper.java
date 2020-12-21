@@ -10,5 +10,4 @@ import java.util.List;
 public abstract class WordSetMapper {
 
     public abstract List<WordSetReadDto> toReadDtos(List<WordSetEntity> wordSetEntity);
-    public abstract WordSetReadDto toReadDto(WordSetEntity wordSetEntity);
 }

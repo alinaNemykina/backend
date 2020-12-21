@@ -2,11 +2,12 @@ package com.example.backend.business.service.impl;
 
 import com.example.backend.business.dao.CourseRepository;
 import com.example.backend.business.entity.CourseEntity;
+import com.example.backend.business.entity.User2CourseProgressEntity;
 import com.example.backend.business.service.CourseService;
 import com.example.backend.business.service.User2CourseProgressService;
 import com.example.backend.web.dto.mapper.CourseMapper;
 import com.example.backend.web.dto.read.CourseReadDto;
-import com.example.backend.web.error.ResourceNotFoundException;
+import com.example.backend.web.dto.read.CourseTaskReadDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +27,9 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public CourseEntity getById(Integer id) {
-        return courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+    public CourseTaskReadDto getById(Integer id, UUID userID) {
+        User2CourseProgressEntity user2CourseProgressEntity = user2CourseProgressService.getCourseEntityByUserID(userID, id);
+        return courseMapper.toReadDto(user2CourseProgressEntity.getCourse(), user2CourseProgressEntity.getStatus());
     }
 
     @Override
@@ -36,14 +38,14 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<CourseEntity> getAllEntity() {
+        return courseRepository.findAll();
+    }
+
+    @Override
     public List<CourseEntity> getByIdNot(UUID id) {
         List<Integer> listId = user2CourseProgressService.getIdCourseInStatusLearned(id);
         return listId.isEmpty() ? courseRepository.findAll() :
                 courseRepository.findByIdNotIn(listId);
-    }
-
-    @Override
-    public List<CourseEntity> getAllEntities() {
-        return courseRepository.findAll();
     }
 }
