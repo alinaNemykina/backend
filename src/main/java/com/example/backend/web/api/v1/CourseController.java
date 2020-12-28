@@ -4,6 +4,7 @@ import com.example.backend.business.entity.CourseEntity;
 import com.example.backend.business.service.CourseService;
 import com.example.backend.web.dto.read.CourseReadDto;
 import com.example.backend.web.dto.read.CourseTaskReadDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,7 @@ public class CourseController {
     }
 
     @GetMapping(ALL)
-    public List<CourseReadDto> getAll() {
-        return courseService.getAll();
+    public ResponseEntity<List<CourseReadDto>> getAll(){
+        return ResponseEntity.ok(courseService.getAll());
     }
 }

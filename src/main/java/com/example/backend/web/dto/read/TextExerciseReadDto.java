@@ -10,4 +10,7 @@ public class TextExerciseReadDto {
     private String text;
     private Integer cookies;
     private StatusTaskEnum status;
+    private String imagePath;
+    private String explanation;
+    private String title;
 }

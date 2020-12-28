@@ -1,6 +1,7 @@
 package com.example.backend.business.service;
 
 import com.example.backend.business.entity.VideoExerciseEntity;
+import com.example.backend.web.dto.read.VideoExerciseReadDto;
 import com.example.backend.web.dto.update.TextExerciseStatusUpdateDto;
 import com.example.backend.web.dto.update.VideoExerciseUpdateDto;
 
@@ -11,4 +12,5 @@ public interface User2VideoProgressService {
     List<Long> getIdVideoInStatusLearned(UUID id);
     void save (UUID id, VideoExerciseEntity videoExerciseEntity);
     void setNewStatus(VideoExerciseUpdateDto videoExerciseUpdateDto);
+    VideoExerciseReadDto getByUserId(UUID uuid, Long id);
 }

@@ -3,9 +3,13 @@ package com.example.backend.business.service.impl;
 import com.example.backend.business.dao.User2CourseProgressRepository;
 import com.example.backend.business.entity.CourseEntity;
 import com.example.backend.business.entity.User2CourseProgressEntity;
+import com.example.backend.business.entity.UserEntity;
 import com.example.backend.business.enums.StatusCourseEnum;
 import com.example.backend.business.service.User2CourseProgressService;
 import com.example.backend.business.service.UserService;
+import com.example.backend.web.dto.mapper.CourseMapper;
+import com.example.backend.web.dto.read.CourseReadDto;
+import com.example.backend.web.dto.read.CourseTaskReadDto;
 import com.example.backend.web.dto.update.CourseStatusUpdateDto;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +22,17 @@ public class User2CourseProgressServiceImpl implements User2CourseProgressServic
 
     private final User2CourseProgressRepository user2CourseProgressRepository;
     private final UserService userService;
+    private final CourseMapper courseMapper;
 
-    public User2CourseProgressServiceImpl(User2CourseProgressRepository user2CourseProgressRepository, UserService userService) {
+    public User2CourseProgressServiceImpl(User2CourseProgressRepository user2CourseProgressRepository, UserService userService, CourseMapper courseMapper) {
         this.user2CourseProgressRepository = user2CourseProgressRepository;
         this.userService = userService;
+        this.courseMapper = courseMapper;
     }
 
     @Override
     public User2CourseProgressEntity getCourseEntityByUserID(UUID userID, Integer courseID) {
-        return user2CourseProgressRepository.findByUserIdAndCourseId(userID,courseID);
+        return user2CourseProgressRepository.findByUserIdAndCourseId(userID, courseID);
     }
 
     @Override
@@ -38,7 +44,7 @@ public class User2CourseProgressServiceImpl implements User2CourseProgressServic
 
     @Override
     public StatusCourseEnum save(UUID id, CourseEntity courseEntity) {
-        if (user2CourseProgressRepository.existsByUserIdAndCourseId(id, courseEntity.getId())){
+        if (user2CourseProgressRepository.existsByUserIdAndCourseId(id, courseEntity.getId())) {
             return user2CourseProgressRepository.findByUserIdAndCourseId(id, courseEntity.getId()).getStatus();
         } else {
             User2CourseProgressEntity user2CourseProgressEntity = new User2CourseProgressEntity();
@@ -57,6 +63,8 @@ public class User2CourseProgressServiceImpl implements User2CourseProgressServic
         User2CourseProgressEntity user2CourseProgressEntity =
                 user2CourseProgressRepository.findByUserIdAndCourseId(courseStatusUpdateDto.getId(), courseStatusUpdateDto.getCourseId());
         user2CourseProgressEntity.setStatus(courseStatusUpdateDto.getStatusCourseEnum());
+        UserEntity user = user2CourseProgressEntity.getUser();
+        user.setBalanceOfCookies(user.getBalanceOfCookies() + user2CourseProgressEntity.getProgress());
         user2CourseProgressRepository.save(user2CourseProgressEntity);
     }
 }

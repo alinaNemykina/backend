@@ -4,6 +4,7 @@ import com.example.backend.business.entity.AuthorityEntity;
 import com.example.backend.business.entity.UserEntity;
 import com.example.backend.business.enums.AuthorityEnum;
 import com.example.backend.web.dto.create.CreateUserDto;
+import com.example.backend.web.dto.read.UserReadDto;
 import com.example.backend.web.dto.update.UserUpdateDto;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +15,8 @@ import java.util.UUID;
 
 public interface UserService extends UserDetailsService {
     UserEntity getById(UUID id);
+
+    UserReadDto getDtoById(UUID id);
 
     UserEntity findByEmail(String email);
 

@@ -1,6 +1,7 @@
 package com.example.backend.business.service;
 
 import com.example.backend.business.entity.TextExerciseEntity;
+import com.example.backend.web.dto.read.TextExerciseReadDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,4 +9,5 @@ import java.util.UUID;
 public interface TextExerciseService {
     List<TextExerciseEntity> getByIdNot(UUID ids);
     List<TextExerciseEntity> getAll();
+    TextExerciseReadDto getById(Long id);
 }

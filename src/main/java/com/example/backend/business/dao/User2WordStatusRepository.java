@@ -15,5 +15,4 @@ public interface User2WordStatusRepository extends JpaRepository<User2WordStatus
     User2WordStatusEntity findByUserIdAndWordId(UUID userId, Long wordId);
     Boolean existsByUserIdAndWordId(UUID userId, Long wordId);
     List<User2WordStatusEntity> findAllByUserId(UUID userId);
-
 }

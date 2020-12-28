@@ -20,6 +20,9 @@ public abstract class TextExerciseMapper {
         textExerciseReadDto.setText( textExerciseEntity.getText() );
         textExerciseReadDto.setCookies( textExerciseEntity.getCookies() );
         textExerciseReadDto.setStatus(StatusTaskEnum.LEARNING);
+        textExerciseReadDto.setImagePath("img/reading.jpeg");
+        textExerciseReadDto.setTitle("Читай скорее текст!");
+        textExerciseReadDto.setExplanation("И запоминай слова!");
 
         return textExerciseReadDto;
     }

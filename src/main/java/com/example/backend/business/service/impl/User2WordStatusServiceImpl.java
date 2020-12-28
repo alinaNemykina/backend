@@ -2,6 +2,7 @@ package com.example.backend.business.service.impl;
 
 import com.example.backend.business.dao.User2WordStatusRepository;
 import com.example.backend.business.entity.User2WordStatusEntity;
+import com.example.backend.business.entity.UserEntity;
 import com.example.backend.business.entity.WordEntity;
 import com.example.backend.business.enums.StatusWordEnum;
 import com.example.backend.business.service.User2WordStatusService;
@@ -40,8 +41,8 @@ public class User2WordStatusServiceImpl implements User2WordStatusService {
     }
 
     @Override
-    public StatusWordEnum save (UUID id, WordEntity wordEntity){
-        if (user2WordStatusRepository.existsByUserIdAndWordId(id, wordEntity.getId())){
+    public StatusWordEnum save(UUID id, WordEntity wordEntity) {
+        if (user2WordStatusRepository.existsByUserIdAndWordId(id, wordEntity.getId())) {
             return user2WordStatusRepository.findByUserIdAndWordId(id, wordEntity.getId()).getStatus();
         } else {
             User2WordStatusEntity user2WordStatusEntity = new User2WordStatusEntity();
@@ -57,8 +58,8 @@ public class User2WordStatusServiceImpl implements User2WordStatusService {
     public List<WordReadDto> getAllForUser(UUID id) {
         List<WordReadDto> wordReadDtos = new ArrayList<>();
         user2WordStatusRepository.findAllByUserId(id).forEach(item -> {
-                wordReadDtos.add(wordMapper.toReadDto(item.getWord(), item.getStatus()));
-            }
+                    wordReadDtos.add(wordMapper.toReadDto(item.getWord(), item.getStatus()));
+                }
         );
         return wordReadDtos;
     }
@@ -69,32 +70,39 @@ public class User2WordStatusServiceImpl implements User2WordStatusService {
         List<WordEntity> wordEntities = new ArrayList<>();
         List<StatusWordEnum> statusWordEnums = new ArrayList<>();
         wordEntitiesStatus.forEach(item -> {
-            if (item.getStatus() != StatusWordEnum.LEARNED){
+            if (item.getStatus() != StatusWordEnum.LEARNED) {
                 wordEntities.add(item.getWord());
                 statusWordEnums.add(item.getStatus());
             }
         });
 
-        if (!wordEntities.isEmpty()){
+        if (!wordEntities.isEmpty()) {
             int index = random.nextInt(wordEntities.size());
             WordEntity wordEntity = wordEntities.get(index);
             return wordMapper.toReadDto(wordEntity, statusWordEnums.get(index));
         } else {
-          return wordMapper.toReadDto (wordEntitiesStatus
-                  .get(random.nextInt(wordEntitiesStatus.size())).getWord(), StatusWordEnum.LEARNED);
+            return wordMapper.toReadDto(wordEntitiesStatus
+                    .get(random.nextInt(wordEntitiesStatus.size())).getWord(), StatusWordEnum.LEARNED);
         }
     }
 
     @Override
     public WordCountDto getWordCount(UUID id) {
-       return wordMapper.getCount(user2WordStatusRepository.findAllByUserId(id));
+        return wordMapper.getCount(user2WordStatusRepository.findAllByUserId(id));
+    }
+
+    @Override
+    public User2WordStatusEntity getWordEntityByUserIdAndWordId(UUID uuid, Long id) {
+        return user2WordStatusRepository.findByUserIdAndWordId(uuid, id);
     }
 
     @Override
     public void setNewStatus(WordStatusUpdateDto wordStatusUpdateDto) {
         User2WordStatusEntity user2WordStatusEntity = user2WordStatusRepository
-                .findByUserIdAndWordId(wordStatusUpdateDto.getId(),wordStatusUpdateDto.getWordId());
+                .findByUserIdAndWordId(wordStatusUpdateDto.getId(), wordStatusUpdateDto.getWordId());
         user2WordStatusEntity.setStatus(wordStatusUpdateDto.getStatus());
+        UserEntity user = user2WordStatusEntity.getUser();
+        user.setBalanceOfCookies(user.getBalanceOfCookies() + 1);
         user2WordStatusRepository.save(user2WordStatusEntity);
     }
 }

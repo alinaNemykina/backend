@@ -3,7 +3,7 @@ package com.example.backend.business.service.impl;
 import com.example.backend.business.dao.User2TextProgressRepository;
 import com.example.backend.business.entity.TextExerciseEntity;
 import com.example.backend.business.entity.User2TextProgressEntity;
-import com.example.backend.business.entity.User2VideoProgressEntity;
+import com.example.backend.business.entity.UserEntity;
 import com.example.backend.business.enums.StatusTaskEnum;
 import com.example.backend.business.service.User2TextProgressService;
 import com.example.backend.business.service.UserService;
@@ -49,6 +49,9 @@ public class User2TextProgressServiceImpl implements User2TextProgressService {
         User2TextProgressEntity user2TextProgressEntity
                 = user2TextProgressRepository.findByUserIdAndTextExerciseId(textExerciseStatusUpdateDto.getId(), textExerciseStatusUpdateDto.getTextId());
         user2TextProgressEntity.setStatus(textExerciseStatusUpdateDto.getStatusTaskEnum());
+        UserEntity user = user2TextProgressEntity.getUser();
+        TextExerciseEntity textExerciseEntity = user2TextProgressEntity.getTextExercise();
+        user.setBalanceOfCookies(user.getBalanceOfCookies() + textExerciseEntity.getCookies());
         user2TextProgressRepository.save(user2TextProgressEntity);
     }
 }

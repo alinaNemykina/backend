@@ -4,6 +4,7 @@ package com.example.backend.web.api.v1;
 import com.example.backend.business.service.WordSetService;
 import com.example.backend.web.dto.create.AddWordSetCreateDto;
 import com.example.backend.web.dto.read.WordSetReadDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +27,8 @@ public class WordSetController {
 
 
     @GetMapping(ALL)
-    public List<WordSetReadDto> getAll() {
-        return wordSetService.getAll();
+    public ResponseEntity<List<WordSetReadDto>> getAll() {
+        return ResponseEntity.ok(wordSetService.getAll());
     }
 
     @PutMapping

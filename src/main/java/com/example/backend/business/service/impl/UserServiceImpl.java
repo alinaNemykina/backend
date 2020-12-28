@@ -8,6 +8,7 @@ import com.example.backend.business.enums.AuthorityEnum;
 import com.example.backend.business.service.UserService;
 import com.example.backend.web.dto.create.CreateUserDto;
 import com.example.backend.web.dto.mapper.UserMapper;
+import com.example.backend.web.dto.read.UserReadDto;
 import com.example.backend.web.dto.update.UserUpdateDto;
 import com.example.backend.web.error.NotAccessException;
 import com.example.backend.web.error.ResourceNotFoundException;
@@ -40,6 +41,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity getById(UUID id) {
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+    }
+
+    @Override
+    public UserReadDto getDtoById(UUID id) {
+        UserEntity userEntity = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+        UserReadDto userReadDto = new UserReadDto();
+        userReadDto.setBalanceOfCookies(userEntity.getBalanceOfCookies());
+        return userReadDto;
     }
 
     @Override

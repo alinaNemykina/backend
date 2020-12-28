@@ -66,14 +66,14 @@
             <column name="id">2</column>
             <column name="name">Clothes Vocabulary 1 - Sentences by ELF Learning</column>
             <column name="video_url">https://www.youtube.com/watch?v=taoCF1cKZSY&amp;t=58s</column>
-            <column name="cookies">20</column>
+            <column name="cookies">10</column>
         </insert>
 
         <insert tableName="video_exercise">
             <column name="id">3</column>
-            <column name="name">ллллллллллллллллллллллences by ELF Learning</column>
-            <column name="video_url">https://www.youtube.com/watch?v=taoCF1cKZSY&amp;t=58s</column>
-            <column name="cookies">20</column>
+            <column name="name">The Alphabet Is So Much Fun | + More Kids Songs | Super Simple Songs</column>
+            <column name="video_url">https://www.youtube.com/watch?v=n8PyUO2PL4A</column>
+            <column name="cookies">15</column>
         </insert>
 
         <insert tableName="word">
@@ -84,7 +84,7 @@
         <insert tableName="word">
             <column name="id">2</column>
             <column name="original">Parrot</column>
-            <column name="translation">Папугай</column>
+            <column name="translation">Попугай</column>
         </insert>
         <insert tableName="word">
             <column name="id">3</column>
@@ -184,8 +184,42 @@
             </column>
         </insert>
 
-
     </changeSet>
+
+    <changeSet id="26122020-0757" author="nemykina">
+        <insert tableName="word_set">
+            <column name="name">Еда</column>
+            <column name="image_path_uri">img/еда.jpg</column>
+        </insert>
+        <insert tableName="word_set">
+            <column name="name">Мебель</column>
+            <column name="image_path_uri">img/мебель.jpg</column>
+        </insert>
+        <insert tableName="word_set">
+            <column name="name">Напитки</column>
+            <column name="image_path_uri">img/напитки.jpg</column>
+        </insert>
+    </changeSet>
+
+<!--    <changeSet id="28122020-0757" author="nemykina">-->
+<!--        <insert tableName="word_set2word">-->
+<!--            <column name="word_set_id">1</column>-->
+<!--            <column name="word_id">6</column>-->
+<!--        </insert>-->
+<!--        <insert tableName="word_set2word">-->
+<!--            <column name="word_set_id">3</column>-->
+<!--            <column name="word_id">5</column>-->
+<!--        </insert>-->
+<!--        <insert tableName="word_set2word">-->
+<!--            <column name="word_set_id">2</column>-->
+<!--            <column name="word_id">7</column>-->
+<!--        </insert>-->
+<!--        <insert tableName="word">-->
+<!--            <column name="id">7</column>-->
+<!--            <column name="original">Chair</column>-->
+<!--            <column name="translation">Стул</column>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
 
 
 </databaseChangeLog>

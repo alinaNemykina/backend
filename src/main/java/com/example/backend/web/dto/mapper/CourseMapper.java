@@ -11,18 +11,22 @@ import java.util.List;
 @Mapper
 public abstract class CourseMapper {
     public CourseTaskReadDto toReadDto(CourseEntity courseEntity, StatusCourseEnum statusCourseEnum) {
-        if ( courseEntity == null ) {
+        if (courseEntity == null) {
             return null;
         }
 
         CourseTaskReadDto courseTaskReadDto = new CourseTaskReadDto();
 
-        if ( courseEntity.getId() != null ) {
-            courseTaskReadDto.setId( courseEntity.getId().longValue() );
+        if (courseEntity.getId() != null) {
+            courseTaskReadDto.setId(courseEntity.getId().longValue());
         }
-        courseTaskReadDto.setStatus( statusCourseEnum );
-        courseTaskReadDto.setTheory( courseEntity.getTheory() );
-        courseTaskReadDto.setCookies( courseEntity.getCookies() );
+        courseTaskReadDto.setStatus(statusCourseEnum);
+        courseTaskReadDto.setTheory(courseEntity.getTheory());
+        courseTaskReadDto.setCookies(courseEntity.getCookies());
+        courseTaskReadDto.setName(courseEntity.getName());
+        courseTaskReadDto.setImagePath("img/grammar.png");
+        courseTaskReadDto.setExplanation("Много знаний не бывает");
+        courseTaskReadDto.setTitle("Изучим урок из курса?");
 
         return courseTaskReadDto;
     }

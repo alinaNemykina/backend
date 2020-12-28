@@ -12,4 +12,8 @@ public class WordReadDto {
     private String original;
     private String translation;
     private StatusWordEnum status;
+    private String name;
+    private String imagePath;
+    private String explanation;
+    private String title;
 }

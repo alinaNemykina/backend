@@ -1,7 +1,10 @@
 package com.example.backend.web.dto.read;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 public class WordCountDto {
     Integer newStatus = 0;

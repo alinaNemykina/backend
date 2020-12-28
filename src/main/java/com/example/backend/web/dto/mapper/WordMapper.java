@@ -23,6 +23,10 @@ public abstract class WordMapper {
         wordReadDto.setOriginal(wordEntity.getOriginal());
         wordReadDto.setTranslation(wordEntity.getTranslation());
         wordReadDto.setStatus(statusWordEnum);
+        wordReadDto.setName("Перевод-слово");
+        wordReadDto.setImagePath("img/translation_.jpeg");
+        wordReadDto.setExplanation("Давай попробуем вместе!");
+        wordReadDto.setTitle("Слабо отгадать перевод слова?");
 
         return wordReadDto;
     }
@@ -44,5 +48,4 @@ public abstract class WordMapper {
         });
         return wordCountDto;
     }
-
 }

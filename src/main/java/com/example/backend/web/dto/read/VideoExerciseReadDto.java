@@ -10,4 +10,7 @@ public class VideoExerciseReadDto {
     private String videoUrl;
     private Integer cookies;
     private StatusTaskEnum status;
+    private String imagePath;
+    private String explanation;
+    private String title;
 }

@@ -20,6 +20,9 @@ public abstract class VideoExerciseMapper {
         videoExerciseReadDto.setVideoUrl( videoExerciseEntity.getVideoUrl() );
         videoExerciseReadDto.setCookies( videoExerciseEntity.getCookies() );
         videoExerciseReadDto.setStatus(StatusTaskEnum.LEARNING);
+        videoExerciseReadDto.setImagePath("img/translation.jpeg");
+        videoExerciseReadDto.setExplanation("И учи незнакомые слова!");
+        videoExerciseReadDto.setTitle("Смотри классное видео!");
 
         return videoExerciseReadDto;
     }

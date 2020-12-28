@@ -88,6 +88,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
         public void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/oauth/**").permitAll()
+                    .antMatchers(HttpMethod.GET, "/swagger-ui.html#/**").anonymous()
                     .antMatchers(HttpMethod.OPTIONS, "/oauth/**").permitAll()
                     .antMatchers(HttpMethod.POST, "/api/register").anonymous()
                     .antMatchers(HttpMethod.GET, "/api/v1/**").hasAnyAuthority("ADMIN", "USER")
@@ -97,6 +98,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
                     .antMatchers(HttpMethod.PATCH, "/api/v1/**").hasAnyAuthority("ADMIN", "USER")
                     .anyRequest()
                     .authenticated();
+            
 
         }
     }

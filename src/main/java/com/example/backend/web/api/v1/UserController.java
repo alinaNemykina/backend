@@ -3,18 +3,17 @@ package com.example.backend.web.api.v1;
 import com.example.backend.business.entity.UserEntity;
 import com.example.backend.business.service.UserService;
 import com.example.backend.web.dto.create.CreateUserDto;
+import com.example.backend.web.dto.read.UserReadDto;
 import com.example.backend.web.dto.update.UserUpdateDto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.UUID;
 
 import static com.example.backend.utils.ApiConstantUtils.USER;
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(USER)
@@ -28,10 +27,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserEntity findById(@PathVariable UUID id){
-        return userService.getById(id);
+    public UserReadDto findById(@PathVariable UUID id){
+        return userService.getDtoById(id);
     }
-
 
     @PostMapping
     public ResponseEntity<Object> register(@RequestBody CreateUserDto user) {
@@ -39,7 +37,7 @@ public class UserController {
         return ResponseEntity.ok(userService.register(user));
     }
 
-    @PutMapping
+    @PutMapping(consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> update(@Valid @RequestBody UserUpdateDto userDto){
         userService.update(userDto);
         return ResponseEntity.ok().build();
